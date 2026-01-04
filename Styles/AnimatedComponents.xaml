@@ -1,0 +1,358 @@
+<!--
+    Animated Components with Tailwind-inspired smooth transitions
+    Ready-to-use components with built-in animations
+-->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Import base styles and animations -->
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="TailwindColors.xaml" />
+        <ResourceDictionary Source="TailwindComponents.xaml" />
+        <ResourceDictionary Source="TailwindAnimations.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <!-- ========================================= -->
+    <!-- ANIMATED BUTTONS -->
+    <!-- ========================================= -->
+
+    <!-- Animated Primary Button with hover effects -->
+    <Style x:Key="TailwindAnimatedButtonPrimary" TargetType="Button" BasedOn="{StaticResource TailwindButtonPrimary}">
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <TransformGroup>
+                    <ScaleTransform />
+                    <TranslateTransform />
+                </TransformGroup>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="RenderTransformOrigin" Value="0.5,0.5" />
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="MouseEnter">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
+                                         To="1.02"
+                                         Duration="{StaticResource Duration150}"
+                                         EasingFunction="{StaticResource EaseOut}" />
+                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
+                                         To="1.02"
+                                         Duration="{StaticResource Duration150}"
+                                         EasingFunction="{StaticResource EaseOut}" />
+                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[1].(TranslateTransform.Y)"
+                                         To="-1"
+                                         Duration="{StaticResource Duration150}"
+                                         EasingFunction="{StaticResource EaseOut}" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="MouseLeave">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
+                                         To="1.0"
+                                         Duration="{StaticResource Duration150}"
+                                         EasingFunction="{StaticResource EaseOut}" />
+                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
+                                         To="1.0"
+                                         Duration="{StaticResource Duration150}"
+                                         EasingFunction="{StaticResource EaseOut}" />
+                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[1].(TranslateTransform.Y)"
+                                         To="0"
+                                         Duration="{StaticResource Duration150}"
+                                         EasingFunction="{StaticResource EaseOut}" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="PreviewMouseLeftButtonDown">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
+                                         To="0.98"
+                                         Duration="{StaticResource Duration75}"
+                                         EasingFunction="{StaticResource EaseOut}" />
+                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
+                                         To="0.98"
+                                         Duration="{StaticResource Duration75}"
+                                         EasingFunction="{StaticResource EaseOut}" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="PreviewMouseLeftButtonUp">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
+                                         To="1.02"
+                                         Duration="{StaticResource Duration150}"
+                                         EasingFunction="{StaticResource EaseOutBack}" />
+                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
+                                         To="1.02"
+                                         Duration="{StaticResource Duration150}"
+                                         EasingFunction="{StaticResource EaseOutBack}" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Animated Card with entrance animation -->
+    <Style x:Key="TailwindAnimatedCard" TargetType="Border" BasedOn="{StaticResource TailwindCard}">
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <TransformGroup>
+                    <ScaleTransform />
+                    <TranslateTransform />
+                </TransformGroup>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="RenderTransformOrigin" Value="0.5,0.5" />
+        <Setter Property="Opacity" Value="0" />
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="Loaded">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[1].(TranslateTransform.Y)"
+                                         From="20" To="0"
+                                         Duration="{StaticResource Duration300}"
+                                         EasingFunction="{StaticResource EaseOutCubic}" />
+                        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                         From="0" To="1"
+                                         Duration="{StaticResource Duration300}"
+                                         EasingFunction="{StaticResource EaseOut}" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="MouseEnter">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[1].(TranslateTransform.Y)"
+                                         To="-2"
+                                         Duration="{StaticResource Duration200}"
+                                         EasingFunction="{StaticResource EaseOut}" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="MouseLeave">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[1].(TranslateTransform.Y)"
+                                         To="0"
+                                         Duration="{StaticResource Duration200}"
+                                         EasingFunction="{StaticResource EaseOut}" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- ========================================= -->
+    <!-- ANIMATED PROGRESS BAR -->
+    <!-- ========================================= -->
+
+    <Style x:Key="TailwindAnimatedProgressBar" TargetType="ProgressBar" BasedOn="{StaticResource TailwindProgressBar}">
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <ScaleTransform ScaleX="1" />
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="Loaded">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                         From="0" To="1"
+                                         Duration="{StaticResource Duration300}"
+                                         EasingFunction="{StaticResource EaseOutCubic}" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- ========================================= -->
+    <!-- ANIMATED TEXTBOX -->
+    <!-- ========================================= -->
+
+    <Style x:Key="TailwindAnimatedTextBox" TargetType="TextBox" BasedOn="{StaticResource TailwindTextBox}">
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <ScaleTransform />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="RenderTransformOrigin" Value="0.5,0.5" />
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="GotFocus">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                         To="1.01"
+                                         Duration="{StaticResource Duration150}"
+                                         EasingFunction="{StaticResource EaseOut}" />
+                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                                         To="1.01"
+                                         Duration="{StaticResource Duration150}"
+                                         EasingFunction="{StaticResource EaseOut}" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="LostFocus">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                         To="1.0"
+                                         Duration="{StaticResource Duration150}"
+                                         EasingFunction="{StaticResource EaseOut}" />
+                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                                         To="1.0"
+                                         Duration="{StaticResource Duration150}"
+                                         EasingFunction="{StaticResource EaseOut}" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- ========================================= -->
+    <!-- LOADING SPINNER -->
+    <!-- ========================================= -->
+
+    <Style x:Key="TailwindSpinner" TargetType="Border">
+        <Setter Property="Width" Value="40" />
+        <Setter Property="Height" Value="40" />
+        <Setter Property="BorderBrush" Value="{StaticResource Blue600Brush}" />
+        <Setter Property="BorderThickness" Value="4,4,4,0" />
+        <Setter Property="CornerRadius" Value="20" />
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <RotateTransform />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="RenderTransformOrigin" Value="0.5,0.5" />
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="Loaded">
+                <BeginStoryboard>
+                    <Storyboard RepeatBehavior="Forever">
+                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                                         From="0" To="360"
+                                         Duration="{StaticResource Duration1000}"
+                                         EasingFunction="{StaticResource EaseLinear}" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- ========================================= -->
+    <!-- NOTIFICATION TOAST -->
+    <!-- ========================================= -->
+
+    <Style x:Key="TailwindNotificationToast" TargetType="Border">
+        <Setter Property="Background" Value="White" />
+        <Setter Property="BorderBrush" Value="{StaticResource Gray200Brush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="{StaticResource RoundedLg}" />
+        <Setter Property="Padding" Value="16" />
+        <Setter Property="Margin" Value="8" />
+        <Setter Property="MaxWidth" Value="400" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect Color="{StaticResource Gray900Color}" 
+                                Opacity="0.15" 
+                                BlurRadius="15" 
+                                ShadowDepth="5" 
+                                Direction="270" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <TranslateTransform Y="-100" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Opacity" Value="0" />
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="Loaded">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
+                                         From="-100" To="0"
+                                         Duration="{StaticResource Duration300}"
+                                         EasingFunction="{StaticResource EaseOutBack}" />
+                        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                         From="0" To="1"
+                                         Duration="{StaticResource Duration200}"
+                                         EasingFunction="{StaticResource EaseOut}" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Success Toast -->
+    <Style x:Key="TailwindSuccessToast" TargetType="Border" BasedOn="{StaticResource TailwindNotificationToast}">
+        <Setter Property="Background" Value="{StaticResource Green50Brush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Green200Brush}" />
+    </Style>
+
+    <!-- Error Toast -->
+    <Style x:Key="TailwindErrorToast" TargetType="Border" BasedOn="{StaticResource TailwindNotificationToast}">
+        <Setter Property="Background" Value="{StaticResource Red50Brush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Red200Brush}" />
+    </Style>
+
+    <!-- Warning Toast -->
+    <Style x:Key="TailwindWarningToast" TargetType="Border" BasedOn="{StaticResource TailwindNotificationToast}">
+        <Setter Property="Background" Value="{StaticResource Amber50Brush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Amber200Brush}" />
+    </Style>
+
+    <!-- ========================================= -->
+    <!-- ANIMATED ICONS -->
+    <!-- ========================================= -->
+
+    <!-- Pulse Icon Animation -->
+    <Style x:Key="TailwindPulseIcon" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <ScaleTransform />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="RenderTransformOrigin" Value="0.5,0.5" />
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="Loaded">
+                <BeginStoryboard>
+                    <Storyboard RepeatBehavior="Forever" AutoReverse="True">
+                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                         From="1.0" To="1.1"
+                                         Duration="{StaticResource Duration1000}"
+                                         EasingFunction="{StaticResource EaseInOut}" />
+                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                                         From="1.0" To="1.1"
+                                         Duration="{StaticResource Duration1000}"
+                                         EasingFunction="{StaticResource EaseInOut}" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- ========================================= -->
+    <!-- STAGGERED ANIMATIONS -->
+    <!-- ========================================= -->
+
+    <!-- Staggered Card Animation (for lists) -->
+    <Style x:Key="TailwindStaggeredCard" TargetType="Border" BasedOn="{StaticResource TailwindCard}">
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <TranslateTransform Y="30" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Opacity" Value="0" />
+        <!-- Animation will be triggered programmatically with delays -->
+    </Style>
+
+</ResourceDictionary>

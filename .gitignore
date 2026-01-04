@@ -1,0 +1,56 @@
+# Build results
+bin/
+obj/
+publish/
+
+# User-specific files
+*.user
+*.userosscache
+*.suo
+*.userprefs
+*.user.uidprefs
+*.DotSettings
+*.DotSettings.user
+*.vspscc
+*.vssscc
+*.orig
+*.vswr
+*.sln.docstates
+
+# Visual Studio files
+.vs/
+*.VC.db
+*.VC.VC.opendb
+*.VC.VC.opendb-shm
+*.VC.VC.opendb-wal
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Icon?
+desktop.ini
+$RECYCLE.BIN/
+*.tmp
+*.bak
+*.cache
+*.log
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# IDE
+*.swp
+*.swn
+*~
+
+# Test Photos
+TestPhotos/
+
+# Web App Source (Managed in separate repo)
+source-for-web/
+
+
+# Credentials
+credentials.json
+token.json

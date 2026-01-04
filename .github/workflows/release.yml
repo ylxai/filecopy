@@ -1,0 +1,41 @@
+name: Build and Release WPF App
+
+on:
+  push:
+    tags:
+      - "v*" # Trigger on version tags like v1.0.0
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Restore dependencies
+        run: dotnet restore FileCopyUtility.WPF.csproj
+
+      - name: Build
+        run: dotnet build FileCopyUtility.WPF.csproj --configuration Release --no-restore
+
+      - name: Publish (Single File)
+        run: dotnet publish FileCopyUtility.WPF.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -o ./publish
+
+      - name: Zip Release
+        run: Compress-Archive -Path ./publish/* -DestinationPath ./FileCopyUtility-Hafiportrait.zip
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: ./FileCopyUtility-Hafiportrait.zip
+          token: ${{ secrets.GITHUB_TOKEN }}

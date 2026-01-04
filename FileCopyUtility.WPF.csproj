@@ -1,0 +1,158 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <AssemblyName>FileCopyUtility</AssemblyName>
+    <RootNamespace>FileCopyUtility</RootNamespace>
+    <Version>2.0.0</Version>
+    <Authors>FileCopy Utility Team</Authors>
+    <Description>Professional file copy utility with multi-threading, scheduling, and integrity checking</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Apis.Auth" Version="1.73.0" />
+    <PackageReference Include="Google.Apis.Drive.v3" Version="1.73.0.3996" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
+    <PackageReference Include="MaterialDesignColors" Version="2.1.4" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+    <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="MainWindow.Events.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="MainWindow.FileOperations.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="MainWindow.Helpers.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="MainWindow.Initialization.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="MainWindow.UIHandlers.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="MainWindow.Performance.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="MainWindow.Loading.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Helpers\AnimationHelper.cs">
+      <DependentUpon>Helpers\AnimationHelper.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Helpers\AnimationHelper.Core.cs">
+      <DependentUpon>Helpers\AnimationHelper.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Helpers\AnimationHelper.Fade.cs">
+      <DependentUpon>Helpers\AnimationHelper.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Helpers\AnimationHelper.Slide.cs">
+      <DependentUpon>Helpers\AnimationHelper.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Helpers\AnimationHelper.Scale.cs">
+      <DependentUpon>Helpers\AnimationHelper.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Helpers\AnimationHelper.Hover.cs">
+      <DependentUpon>Helpers\AnimationHelper.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Helpers\AnimationHelper.Progress.cs">
+      <DependentUpon>Helpers\AnimationHelper.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Helpers\AnimationHelper.Notification.cs">
+      <DependentUpon>Helpers\AnimationHelper.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Services\AdvancedReportingService.cs">
+      <DependentUpon>Services\AdvancedReportingService.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Services\AdvancedReportingService.Core.cs">
+      <DependentUpon>Services\AdvancedReportingService.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Services\AdvancedReportingService.Export.cs">
+      <DependentUpon>Services\AdvancedReportingService.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Services\AdvancedReportingService.Helpers.cs">
+      <DependentUpon>Services\AdvancedReportingService.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Services\HighPerformanceFileService.Bulk.cs">
+      <DependentUpon>Services\HighPerformanceFileService.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Services\FileOperationService.cs">
+      <DependentUpon>Services\FileOperationService.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Services\FileOperationService.Core.cs">
+      <DependentUpon>Services\FileOperationService.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Services\FileOperationService.Parallel.cs">
+      <DependentUpon>Services\FileOperationService.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Services\FileOperationService.Helpers.cs">
+      <DependentUpon>Services\FileOperationService.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Services\RealTimeDashboardService.cs">
+      <DependentUpon>Services\RealTimeDashboardService.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Services\RealTimeDashboardService.Core.cs">
+      <DependentUpon>Services\RealTimeDashboardService.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Services\RealTimeDashboardService.Charts.cs">
+      <DependentUpon>Services\RealTimeDashboardService.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Services\RealTimeDashboardService.Resources.cs">
+      <DependentUpon>Services\RealTimeDashboardService.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Services\RealTimeDashboardService.Timeline.cs">
+      <DependentUpon>Services\RealTimeDashboardService.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Services\HighPerformanceFileService.cs">
+      <DependentUpon>Services\HighPerformanceFileService.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Services\HighPerformanceFileService.Core.cs">
+      <DependentUpon>Services\HighPerformanceFileService.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Services\HighPerformanceFileService.Copy.cs">
+      <DependentUpon>Services\HighPerformanceFileService.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Services\HighPerformanceFileService.Helpers.cs">
+      <DependentUpon>Services\HighPerformanceFileService.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Styles\CssToXamlHelper.cs">
+      <DependentUpon>Styles\CssToXamlHelper.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Styles\CssToXamlHelper.Core.cs">
+      <DependentUpon>Styles\CssToXamlHelper.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Styles\CssToXamlHelper.Parsing.cs">
+      <DependentUpon>Styles\CssToXamlHelper.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Styles\CssToXamlHelper.Conversion.cs">
+      <DependentUpon>Styles\CssToXamlHelper.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="icons\**" />
+  </ItemGroup>
+
+</Project>

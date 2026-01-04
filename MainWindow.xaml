@@ -1,0 +1,230 @@
+<Window x:Class="FileCopyUtility.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="FileCopy Utility v2.0 - WPF Edition"
+        Icon="pack://application:,,,/icons/icon.png" 
+        Height="850" Width="1200"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource GlassMainBackgroundBrush}"
+        FontFamily="Segoe UI"
+        FontSize="14"
+        AllowDrop="True"
+        Drop="Window_Drop"
+        DragOver="Window_DragOver">
+
+    <Grid>
+        <!-- Background Abstract Shapes (Optional for depth) -->
+        <Canvas>
+            <Ellipse Width="400" Height="400" Fill="#8B5CF6" Opacity="0.1" Canvas.Left="-100" Canvas.Top="-100">
+                <Ellipse.Effect>
+                    <BlurEffect Radius="100"/>
+                </Ellipse.Effect>
+            </Ellipse>
+            <Ellipse Width="300" Height="300" Fill="#3B82F6" Opacity="0.1" Canvas.Right="-50" Canvas.Bottom="-50">
+                <Ellipse.Effect>
+                    <BlurEffect Radius="80"/>
+                </Ellipse.Effect>
+            </Ellipse>
+        </Canvas>
+
+        <Grid Margin="24">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Floating Glass Header -->
+            <Border Grid.Row="0" Style="{StaticResource GlassCard}" Padding="24,16" Margin="0,0,0,24">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                        <!-- Icon with Glass Effect Container -->
+                        <Border Background="White" CornerRadius="12" Width="48" Height="48" Margin="0,0,16,0" Padding="8">
+                            <Border.Effect>
+                                <DropShadowEffect Color="{StaticResource GlassShadowColor}" Opacity="0.1" BlurRadius="10" ShadowDepth="2"/>
+                            </Border.Effect>
+                            <Image Source="pack://application:,,,/icons/icon.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                        </Border>
+                        
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock Text="FileCopy Utility v2.0" Style="{StaticResource GlassTitleText}" FontSize="20" FontWeight="SemiBold"/>
+                            <TextBlock Text="Hafiportrait" Style="{StaticResource GlassBodyText}" FontSize="12" Opacity="0.8"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                        <Button x:Name="BtnWebGallery" Click="BtnWebGallery_Click" Style="{StaticResource GlassButtonSecondary}" Margin="0,0,8,0" Padding="12,8">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="🌐" Margin="0,0,8,0"/>
+                                <TextBlock Text="Web Gallery"/>
+                            </StackPanel>
+                        </Button>
+                        <Button x:Name="BtnProfiles" Click="BtnProfiles_Click" Style="{StaticResource GlassButtonSecondary}" Margin="0,0,8,0" Padding="12,8">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="📋" Margin="0,0,8,0"/>
+                                <TextBlock Text="Profiles"/>
+                            </StackPanel>
+                        </Button>
+                        <Button x:Name="BtnScheduler" Click="BtnScheduler_Click" Style="{StaticResource GlassButtonSecondary}" Padding="12,8">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="⏰" Margin="0,0,8,0"/>
+                                <TextBlock Text="Scheduler"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- Main Content Area -->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/> <!-- Left: Inputs -->
+                    <ColumnDefinition Width="1.2*"/> <!-- Right: Dashboard -->
+                </Grid.ColumnDefinitions>
+
+                <!-- Left Column: Inputs & File List -->
+                <StackPanel Grid.Column="0" Margin="0,0,24,0">
+                    
+                    <!-- Source Folder Card -->
+                    <Border Style="{StaticResource GlassCard}" Margin="0,0,0,24">
+                        <StackPanel>
+                            <TextBlock Text="📁 Source Folder" Style="{StaticResource GlassTitleText}" FontSize="16" Margin="0,0,0,16"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox x:Name="TxtSourceFolder" Style="{StaticResource GlassTextBox}" IsReadOnly="True" Text="Select source folder..." Margin="0,0,12,0"/>
+                                <Button x:Name="BtnSelectSource" Click="BtnSelectSource_Click" Content="Browse" Style="{StaticResource GlassButton}" Grid.Column="1" Padding="20,8"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- File List Card -->
+                    <Border Style="{StaticResource GlassCard}" VerticalAlignment="Stretch">
+                        <StackPanel>
+                            <Grid Margin="0,0,0,16">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="📋 File List" Style="{StaticResource GlassTitleText}" FontSize="16" VerticalAlignment="Center"/>
+                                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                    <Button x:Name="BtnImportFile" Click="BtnImportFile_Click" Content="Import Text" Style="{StaticResource GlassButtonSecondary}" Padding="12,6" Margin="0,0,8,0" FontSize="12"/>
+                                    <Button x:Name="BtnPasteClipboard" Click="BtnPasteClipboard_Click" Content="Paste" Style="{StaticResource GlassButtonSecondary}" Padding="12,6" FontSize="12"/>
+                                </StackPanel>
+                            </Grid>
+
+                            <TextBox x:Name="TxtFileList" Style="{StaticResource GlassTextBox}" Height="200" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Margin="0,0,0,16" TextChanged="TxtFileList_TextChanged"/>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox x:Name="TxtSearchFilter" Style="{StaticResource GlassTextBox}" Text="🔍 Filter files..." Foreground="{StaticResource GlassTextSecondaryBrush}" GotFocus="TxtSearchFilter_GotFocus" LostFocus="TxtSearchFilter_LostFocus" TextChanged="TxtSearchFilter_TextChanged"/>
+                                <Button x:Name="BtnValidate" Click="BtnValidate_Click" Content="Validate Files" Style="{StaticResource GlassButton}" Grid.Column="1" Margin="12,0,0,0" Background="{StaticResource GlassSuccessBrush}" IsEnabled="False"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+
+                <!-- Right Column: Dashboard & Status -->
+                <StackPanel Grid.Column="1">
+                    <!-- Stats Grid -->
+                    <Grid Margin="0,0,0,24">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Total Files -->
+                        <Border Style="{StaticResource GlassCard}" Margin="0,0,8,8" Padding="16">
+                            <StackPanel>
+                                <TextBlock Text="Total Files" Style="{StaticResource GlassBodyText}" FontSize="12"/>
+                                <TextBlock x:Name="TxtDashboardTotal" Text="0" Style="{StaticResource GlassTitleText}" FontSize="28" Foreground="{StaticResource GlassAccentBrush}"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Speed -->
+                        <Border Grid.Column="1" Style="{StaticResource GlassCard}" Margin="8,0,0,8" Padding="16">
+                            <StackPanel>
+                                <TextBlock Text="Speed" Style="{StaticResource GlassBodyText}" FontSize="12"/>
+                                <TextBlock x:Name="TxtDashboardSpeed" Text="0 MB/s" Style="{StaticResource GlassTitleText}" FontSize="28" Foreground="{StaticResource GlassTextPrimaryBrush}"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Success -->
+                        <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource GlassCard}" Margin="0,8,8,0" Padding="16">
+                            <StackPanel>
+                                <TextBlock Text="Success" Style="{StaticResource GlassBodyText}" FontSize="12"/>
+                                <TextBlock x:Name="TxtDashboardSuccess" Text="0" Style="{StaticResource GlassTitleText}" FontSize="28" Foreground="{StaticResource GlassSuccessBrush}"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Failed -->
+                        <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource GlassCard}" Margin="8,8,0,0" Padding="16">
+                            <StackPanel>
+                                <TextBlock Text="Failed" Style="{StaticResource GlassBodyText}" FontSize="12"/>
+                                <TextBlock x:Name="TxtDashboardFailed" Text="0" Style="{StaticResource GlassTitleText}" FontSize="28" Foreground="{StaticResource GlassErrorBrush}"/>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+
+                    <!-- Progress & Log -->
+                    <Border Style="{StaticResource GlassCard}" VerticalAlignment="Stretch">
+                        <StackPanel>
+                            <TextBlock Text="⚡ Activity" Style="{StaticResource GlassTitleText}" FontSize="16" Margin="0,0,0,16"/>
+                            
+                            <!-- Thread Selection -->
+                            <Grid Margin="0,0,0,16">
+                                <TextBlock Text="Threads:" VerticalAlignment="Center" Style="{StaticResource GlassBodyText}"/>
+                                <ComboBox x:Name="CmbThreadCount" HorizontalAlignment="Right" Width="120" SelectedIndex="2">
+                                    <ComboBoxItem Content="1 (Sequential)"/>
+                                    <ComboBoxItem Content="2 Threads"/>
+                                    <ComboBoxItem Content="4 Threads"/>
+                                    <ComboBoxItem Content="8 Threads"/>
+                                </ComboBox>
+                            </Grid>
+
+                            <ProgressBar x:Name="ProgressTotal" Height="6" Margin="0,0,0,8" Value="0" Background="#E5E7EB" Foreground="{StaticResource GlassAccentBrush}" BorderThickness="0"/>
+                            <TextBlock x:Name="TxtTotalProgress" Text="Ready to copy" Style="{StaticResource GlassBodyText}" FontSize="12" HorizontalAlignment="Right" Margin="0,0,0,4"/>
+                            <TextBlock x:Name="TxtCurrentFile" Text="" Style="{StaticResource GlassBodyText}" FontSize="11" Foreground="{StaticResource GlassTextSecondaryBrush}" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" MaxWidth="300" Margin="0,0,0,16"/>
+
+                            <TextBox x:Name="TxtStatusLog" Style="{StaticResource GlassTextBox}" Height="120" IsReadOnly="True" Background="Transparent" BorderThickness="0" Padding="0" FontSize="12" FontFamily="Consolas"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Grid>
+
+            <!-- Bottom Action Bar -->
+            <Border Grid.Row="2" Style="{StaticResource GlassCard}" Margin="0,24,0,0" Padding="16">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="Ready" x:Name="TxtElapsedTime" Style="{StaticResource GlassBodyText}" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                        <Button x:Name="BtnCancel" Click="BtnCancel_Click" Content="Cancel" Style="{StaticResource GlassButtonSecondary}" Margin="0,0,12,0" Width="100" BorderBrush="{StaticResource GlassErrorBrush}" Foreground="{StaticResource GlassErrorBrush}" IsEnabled="False"/>
+                        <Button x:Name="BtnPause" Click="BtnPause_Click" Content="Pause" Style="{StaticResource GlassButtonSecondary}" Margin="0,0,12,0" Width="100" IsEnabled="False"/>
+                        <Button x:Name="BtnStartCopy" Click="BtnStartCopy_Click" Content="🚀 Start Copy" Style="{StaticResource GlassButton}" Width="150" IsEnabled="False"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

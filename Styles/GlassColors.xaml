@@ -1,0 +1,38 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Glass Theme Colors -->
+    
+    <!-- Backgrounds -->
+    <Color x:Key="GlassBackgroundColor">#F3F4F6</Color>
+    <SolidColorBrush x:Key="GlassBackgroundBrush" Color="{StaticResource GlassBackgroundColor}"/>
+    
+    <LinearGradientBrush x:Key="GlassMainBackgroundBrush" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#F3E8FF" Offset="0.0"/> <!-- Soft Purple -->
+        <GradientStop Color="#E0F2FE" Offset="1.0"/> <!-- Soft Blue -->
+    </LinearGradientBrush>
+
+    <!-- Glass Card Backgrounds (Semi-transparent White) -->
+    <SolidColorBrush x:Key="GlassCardBackgroundBrush" Color="#FFFFFF" Opacity="0.65"/>
+    <SolidColorBrush x:Key="GlassCardHoverBackgroundBrush" Color="#FFFFFF" Opacity="0.85"/>
+    
+    <!-- Glass Borders -->
+    <SolidColorBrush x:Key="GlassBorderBrush" Color="#FFFFFF" Opacity="0.5"/>
+    <SolidColorBrush x:Key="GlassBorderHighlightBrush" Color="#FFFFFF" Opacity="0.8"/>
+
+    <!-- Text Colors -->
+    <SolidColorBrush x:Key="GlassTextPrimaryBrush" Color="#1F2937"/>
+    <SolidColorBrush x:Key="GlassTextSecondaryBrush" Color="#6B7280"/>
+    <SolidColorBrush x:Key="GlassTextAccentBrush" Color="#7C3AED"/> <!-- Violet 600 -->
+
+    <!-- Accents -->
+    <SolidColorBrush x:Key="GlassAccentBrush" Color="#8B5CF6"/> <!-- Violet 500 -->
+    <SolidColorBrush x:Key="GlassAccentHoverBrush" Color="#7C3AED"/> <!-- Violet 600 -->
+    <SolidColorBrush x:Key="GlassSuccessBrush" Color="#10B981"/> <!-- Emerald 500 -->
+    <SolidColorBrush x:Key="GlassErrorBrush" Color="#EF4444"/> <!-- Red 500 -->
+    <SolidColorBrush x:Key="GlassWarningBrush" Color="#F59E0B"/> <!-- Amber 500 -->
+
+    <!-- Shadows -->
+    <Color x:Key="GlassShadowColor">#8B5CF6</Color> <!-- Violet Shadow -->
+
+</ResourceDictionary>

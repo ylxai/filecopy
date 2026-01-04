@@ -1,0 +1,247 @@
+<!--
+    Example implementation of Tailwind CSS v4 styles in WPF
+    Shows how to apply Tailwind design system to real UI components
+-->
+<Window x:Class="FileCopyUtility.TailwindExampleWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Tailwind CSS v4 in WPF - Example" 
+        Height="800" Width="1000"
+        Background="{StaticResource Gray50Brush}">
+
+    <Window.Resources>
+        <!-- Import Tailwind Styles -->
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="TailwindColors.xaml" />
+                <ResourceDictionary Source="TailwindComponents.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="20">
+        <StackPanel MaxWidth="800">
+
+            <!-- Header Section (Tailwind: bg-white shadow-lg rounded-lg p-8 mb-8) -->
+            <Border Style="{StaticResource TailwindCardLarge}" Margin="0,0,0,32">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource TailwindH1}" Text="FileCopy Utility" />
+                    <TextBlock Style="{StaticResource TailwindBodyText}" 
+                              Text="Professional file copying with Tailwind CSS v4 design system" />
+                    
+                    <!-- Button Group (flex space-x-4) -->
+                    <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                        <Button Style="{StaticResource TailwindButtonPrimary}" Content="📁 Select Source" />
+                        <Button Style="{StaticResource TailwindButtonSecondary}" Content="🔍 Scan Folder" />
+                        <Button Style="{StaticResource TailwindButtonOutline}" Content="⚙️ Settings" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Alert Examples -->
+            <TextBlock Style="{StaticResource TailwindH3}" Text="Alert Components" Margin="0,0,0,16" />
+            
+            <!-- Success Alert -->
+            <Border Style="{StaticResource TailwindAlertSuccess}" Margin="0,0,0,8">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="✅" FontSize="16" Margin="0,0,8,0" />
+                    <TextBlock Style="{StaticResource TailwindSmallText}" 
+                              Foreground="{StaticResource Green700Brush}"
+                              Text="Files copied successfully! All operations completed." />
+                </StackPanel>
+            </Border>
+
+            <!-- Warning Alert -->
+            <Border Style="{StaticResource TailwindAlertWarning}" Margin="0,0,0,8">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="⚠️" FontSize="16" Margin="0,0,8,0" />
+                    <TextBlock Style="{StaticResource TailwindSmallText}" 
+                              Foreground="{StaticResource Amber700Brush}"
+                              Text="Some files were skipped due to permission restrictions." />
+                </StackPanel>
+            </Border>
+
+            <!-- Error Alert -->
+            <Border Style="{StaticResource TailwindAlertError}" Margin="0,0,0,8">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="❌" FontSize="16" Margin="0,0,8,0" />
+                    <TextBlock Style="{StaticResource TailwindSmallText}" 
+                              Foreground="{StaticResource Red700Brush}"
+                              Text="Copy operation failed: Destination disk is full." />
+                </StackPanel>
+            </Border>
+
+            <!-- Info Alert -->
+            <Border Style="{StaticResource TailwindAlertInfo}" Margin="0,0,0,24">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="ℹ️" FontSize="16" Margin="0,0,8,0" />
+                    <TextBlock Style="{StaticResource TailwindSmallText}" 
+                              Foreground="{StaticResource Blue700Brush}"
+                              Text="Scanning 1,247 files in 45 folders. This may take a moment." />
+                </StackPanel>
+            </Border>
+
+            <!-- Form Section -->
+            <Border Style="{StaticResource TailwindCard}" Margin="0,0,0,24">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource TailwindH3}" Text="File Selection" />
+                    
+                    <!-- Source Folder Input -->
+                    <Label Style="{StaticResource TailwindLabel}" Content="Source Folder" />
+                    <TextBox Style="{StaticResource TailwindTextBox}" 
+                            Text="C:\Users\Photos\2024\Wildlife" />
+                    
+                    <!-- Destination Folder Input -->
+                    <Label Style="{StaticResource TailwindLabel}" Content="Destination Folder" Margin="0,16,0,0" />
+                    <TextBox Style="{StaticResource TailwindTextBox}" 
+                            Text="D:\Backup\Photos" />
+
+                    <!-- Options -->
+                    <TextBlock Style="{StaticResource TailwindLabel}" Text="Copy Options" Margin="0,20,0,8" />
+                    <StackPanel>
+                        <CheckBox Content="Verify file integrity (MD5 hash)" 
+                                 Foreground="{StaticResource Gray700Brush}" 
+                                 Margin="0,4" />
+                        <CheckBox Content="Copy only RAW + JPG pairs" 
+                                 Foreground="{StaticResource Gray700Brush}" 
+                                 Margin="0,4" />
+                        <CheckBox Content="Preserve folder structure" 
+                                 IsChecked="True"
+                                 Foreground="{StaticResource Gray700Brush}" 
+                                 Margin="0,4" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Progress Section -->
+            <Border Style="{StaticResource TailwindCard}" Margin="0,0,0,24">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource TailwindH3}" Text="Copy Progress" />
+                    
+                    <!-- Progress Info -->
+                    <Grid Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        
+                        <TextBlock Style="{StaticResource TailwindSmallText}" 
+                                  Text="Copying files..." />
+                        <TextBlock Grid.Column="1" 
+                                  Style="{StaticResource TailwindSmallText}" 
+                                  Text="247 / 1,247 files" />
+                    </Grid>
+                    
+                    <!-- Progress Bar -->
+                    <ProgressBar Style="{StaticResource TailwindProgressBar}" 
+                                Value="20" 
+                                Height="12" 
+                                Margin="0,0,0,16" />
+                    
+                    <!-- Speed Stats -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Style="{StaticResource TailwindMutedText}" Text="Speed" />
+                            <TextBlock Style="{StaticResource TailwindSmallText}" Text="45.2 MB/s" />
+                        </StackPanel>
+                        
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Style="{StaticResource TailwindMutedText}" Text="Estimated" />
+                            <TextBlock Style="{StaticResource TailwindSmallText}" Text="2m 34s" />
+                        </StackPanel>
+                        
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Style="{StaticResource TailwindMutedText}" Text="Transferred" />
+                            <TextBlock Style="{StaticResource TailwindSmallText}" Text="1.2 GB" />
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <!-- Button Showcase -->
+            <Border Style="{StaticResource TailwindCard}" Margin="0,0,0,24">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource TailwindH3}" Text="Button Styles" Margin="0,0,0,16" />
+                    
+                    <!-- Primary Buttons -->
+                    <TextBlock Style="{StaticResource TailwindLabel}" Text="Primary Actions" />
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
+                        <Button Style="{StaticResource TailwindButtonPrimary}" Content="🚀 Start Copy" />
+                        <Button Style="{StaticResource TailwindButtonSuccess}" Content="✅ Validate" />
+                        <Button Style="{StaticResource TailwindButtonWarning}" Content="⚠️ Preview" />
+                        <Button Style="{StaticResource TailwindButtonDanger}" Content="🛑 Cancel" />
+                    </StackPanel>
+                    
+                    <!-- Secondary Buttons -->
+                    <TextBlock Style="{StaticResource TailwindLabel}" Text="Secondary Actions" />
+                    <StackPanel Orientation="Horizontal">
+                        <Button Style="{StaticResource TailwindButtonSecondary}" Content="📂 Browse" />
+                        <Button Style="{StaticResource TailwindButtonOutline}" Content="🔧 Options" />
+                        <Button Style="{StaticResource TailwindButtonGhost}" Content="❓ Help" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Color Palette Display -->
+            <Border Style="{StaticResource TailwindCard}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource TailwindH3}" Text="Tailwind Color Palette" Margin="0,0,0,16" />
+                    
+                    <!-- Gray Scale -->
+                    <TextBlock Style="{StaticResource TailwindLabel}" Text="Gray Scale" />
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
+                        <Rectangle Width="40" Height="40" Fill="{StaticResource Gray100Brush}" Margin="2" />
+                        <Rectangle Width="40" Height="40" Fill="{StaticResource Gray200Brush}" Margin="2" />
+                        <Rectangle Width="40" Height="40" Fill="{StaticResource Gray300Brush}" Margin="2" />
+                        <Rectangle Width="40" Height="40" Fill="{StaticResource Gray400Brush}" Margin="2" />
+                        <Rectangle Width="40" Height="40" Fill="{StaticResource Gray500Brush}" Margin="2" />
+                        <Rectangle Width="40" Height="40" Fill="{StaticResource Gray600Brush}" Margin="2" />
+                        <Rectangle Width="40" Height="40" Fill="{StaticResource Gray700Brush}" Margin="2" />
+                        <Rectangle Width="40" Height="40" Fill="{StaticResource Gray800Brush}" Margin="2" />
+                        <Rectangle Width="40" Height="40" Fill="{StaticResource Gray900Brush}" Margin="2" />
+                    </StackPanel>
+
+                    <!-- Color Swatches -->
+                    <TextBlock Style="{StaticResource TailwindLabel}" Text="Brand Colors" />
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" Margin="0,0,16,0">
+                            <Rectangle Width="30" Height="30" Fill="{StaticResource Blue400Brush}" Margin="1" />
+                            <Rectangle Width="30" Height="30" Fill="{StaticResource Blue500Brush}" Margin="1" />
+                            <Rectangle Width="30" Height="30" Fill="{StaticResource Blue600Brush}" Margin="1" />
+                            <Rectangle Width="30" Height="30" Fill="{StaticResource Blue700Brush}" Margin="1" />
+                        </StackPanel>
+                        
+                        <StackPanel Orientation="Horizontal" Margin="0,0,16,0">
+                            <Rectangle Width="30" Height="30" Fill="{StaticResource Green400Brush}" Margin="1" />
+                            <Rectangle Width="30" Height="30" Fill="{StaticResource Green500Brush}" Margin="1" />
+                            <Rectangle Width="30" Height="30" Fill="{StaticResource Green600Brush}" Margin="1" />
+                            <Rectangle Width="30" Height="30" Fill="{StaticResource Green700Brush}" Margin="1" />
+                        </StackPanel>
+                        
+                        <StackPanel Orientation="Horizontal" Margin="0,0,16,0">
+                            <Rectangle Width="30" Height="30" Fill="{StaticResource Red400Brush}" Margin="1" />
+                            <Rectangle Width="30" Height="30" Fill="{StaticResource Red500Brush}" Margin="1" />
+                            <Rectangle Width="30" Height="30" Fill="{StaticResource Red600Brush}" Margin="1" />
+                            <Rectangle Width="30" Height="30" Fill="{StaticResource Red700Brush}" Margin="1" />
+                        </StackPanel>
+                        
+                        <StackPanel Orientation="Horizontal">
+                            <Rectangle Width="30" Height="30" Fill="{StaticResource Amber400Brush}" Margin="1" />
+                            <Rectangle Width="30" Height="30" Fill="{StaticResource Amber500Brush}" Margin="1" />
+                            <Rectangle Width="30" Height="30" Fill="{StaticResource Amber600Brush}" Margin="1" />
+                            <Rectangle Width="30" Height="30" Fill="{StaticResource Amber700Brush}" Margin="1" />
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+        </StackPanel>
+    </ScrollViewer>
+
+</Window>
